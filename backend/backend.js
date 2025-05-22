@@ -5,6 +5,8 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const otplib = require('otplib');
 const qrcode = require('qrcode');
+require('dotenv').config();
+const mongoose = require('mongoose');
 
 const app = express();
 const port = 3000;
@@ -12,8 +14,21 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// In-memory user store (solo per demo, NON usare in produzione)
-const users = {};
+// Connessione a MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => {
+    console.log('Connesso a MongoDB');
+}).catch((err) => {
+    console.error('Errore connessione MongoDB:', err);
+});
+
+// Modello utente
+const User = mongoose.model('User', new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    secret: { type: String, required: true }
+}));
 
 // Documentazione API - Swagger
 const swaggerOptions = {
@@ -69,16 +84,17 @@ app.post('/api/register', async (req, res) => {
     if (!username || !password || !email) {
         return res.status(400).json({ message: 'Dati mancanti' });
     }
-    if (users[username]) {
+    if (await User.findOne({ username })) {
         return res.status(409).json({ message: 'Utente già registrato' });
     }
     // Genera secret TOTP per Google Authenticator
     const secret = otplib.authenticator.generateSecret();
-    users[username] = { password, email, secret };
+    const user = new User({ username, password, email, secret });
+    await user.save();
     // Genera otpauth URL e QR code
     const otpauth = otplib.authenticator.keyuri(username, 'MFA-Demo', secret);
     const qr = await qrcode.toDataURL(otpauth);
-    res.json({ message: 'Registrazione avvenuta con successo', qr, otpauth });
+    res.json({ message: 'Registrazione avvenuta con successo', qr: qr, otpauth: otpauth });
 });
 
 // Login
@@ -107,9 +123,9 @@ app.post('/api/register', async (req, res) => {
  *       401:
  *         description: Username o password errati
  */
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
-    const user = users[username];
+    const user = await User.findOne({ username });
     if (!user || user.password !== password) {
         return res.status(401).json({ message: 'Username o password errati' });
     }
@@ -143,9 +159,9 @@ app.post('/api/login', (req, res) => {
  *       401:
  *         description: Codice MFA errato!
  */
-app.post('/api/verify-mfa', (req, res) => {
+app.post('/api/verify-mfa', async (req, res) => {
     const { username, code } = req.body;
-    const user = users[username];
+    const user = await User.findOne({ username });
     if (!user || !user.secret) {
         return res.status(401).json({ message: 'Utente non trovato o MFA non configurato' });
     }
@@ -154,6 +170,70 @@ app.post('/api/verify-mfa', (req, res) => {
         return res.json({ message: 'Accesso completato!' });
     }
     res.status(401).json({ message: 'Codice MFA errato!' });
+});
+
+// Cancella utente
+/**
+ * @swagger
+ * /api/delete-user:
+ *   delete:
+ *     summary: Cancella un utente tramite username o email
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Utente cancellato con successo
+ *       400:
+ *         description: Username o email richiesto
+ *       404:
+ *         description: Utente non trovato
+ */
+app.delete('/api/delete-user', async (req, res) => {
+    const { username, email } = req.body;
+    if (!username && !email) {
+        return res.status(400).json({ message: 'Username o email richiesto' });
+    }
+    const query = username ? { username } : { email };
+    const result = await User.deleteOne(query);
+    if (result.deletedCount === 1) {
+        return res.json({ message: 'Utente cancellato con successo' });
+    } else {
+        return res.status(404).json({ message: 'Utente non trovato' });
+    }
+});
+
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Ottieni la lista di tutti gli utenti
+ *     responses:
+ *       200:
+ *         description: Lista utenti
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   username:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ */
+app.get('/api/users', async (req, res) => {
+    const users = await User.find({}, { username: 1, email: 1, _id: 0 });
+    res.json(users);
 });
 
 app.listen(port, () => {

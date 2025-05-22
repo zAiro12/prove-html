@@ -1,3 +1,7 @@
+// Base URL centralizzato per tutte le chiamate API
+const API_BASE_URL = 'http://localhost:3000';
+// const API_BASE_URL = 'https://l6n7dj74-3000.euw.devtunnels.ms';
+
 // Gestione login e registrazione demo
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -14,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const registerResult = document.getElementById('registerResult');
         const qrContainer = document.getElementById('qrContainer');
         try {
-            const res = await fetch('http://localhost:3000/api/register', {
+            const res = await fetch(`${API_BASE_URL}/api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password, email })
@@ -23,9 +27,42 @@ document.addEventListener('DOMContentLoaded', function() {
             if (res.ok) {
                 registerResult.textContent = data.message;
                 registerResult.style.color = 'green';
-                // Mostra QR code per Google Authenticator
+                // Mostra QR code per Google Authenticator e campo verifica codice
                 if (data.qr) {
-                    qrContainer.innerHTML = `<p>Scansiona questo QR code con Google Authenticator:</p><img src='${data.qr}' alt='QR Google Authenticator' style='width:200px'><p>Se non puoi scansionare, usa questo codice manuale:<br><b>${data.otpauth}</b></p>`;
+                    qrContainer.innerHTML = `
+                        <p>Scansiona questo QR code con Google Authenticator:</p>
+                        <img src='${data.qr}' alt='QR Google Authenticator' style='width:200px'>
+                        <p>Se non puoi scansionare, usa questo codice manuale:<br>
+                        <a href='${data.otpauth}' target='_blank'><b>Apri App</b></a></p>
+                        <div id="verifyAfterRegister">
+                            <label for="registerMfaCode">Inserisci il codice MFA generato dall'app:</label><br>
+                            <input type="text" id="registerMfaCode" placeholder="Codice MFA"><br>
+                            <button id="verifyRegisterMfaBtn">Verifica Codice</button>
+                            <div id="registerMfaMsg"></div>
+                        </div>
+                    `;
+                    document.getElementById('verifyRegisterMfaBtn').onclick = async function() {
+                        const mfaCode = document.getElementById('registerMfaCode').value;
+                        const mfaMsg = document.getElementById('registerMfaMsg');
+                        try {
+                            const res = await fetch(`${API_BASE_URL}/api/verify-mfa`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ username, code: mfaCode })
+                            });
+                            const data = await res.json();
+                            if (res.ok) {
+                                mfaMsg.textContent = data.message + ' (Registrazione e MFA completati!)';
+                                mfaMsg.style.color = 'green';
+                            } else {
+                                mfaMsg.textContent = data.message;
+                                mfaMsg.style.color = 'red';
+                            }
+                        } catch (err) {
+                            mfaMsg.textContent = 'Errore di rete!';
+                            mfaMsg.style.color = 'red';
+                        }
+                    };
                 } else {
                     qrContainer.innerHTML = '';
                 }
@@ -46,22 +83,17 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         const username = document.getElementById('loginUsername').value;
         const password = document.getElementById('loginPassword').value;
-        try {
-            const res = await fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            const data = await res.json();
-            if (res.ok && data.mfa) {
-                document.getElementById('mfaSection').style.display = 'block';
-                showMessage('Login corretto! Controlla la console del backend per il codice MFA.', 'blue');
-                sessionStorage.setItem('mfa_user', username);
-            } else {
-                showMessage(data.message, 'red');
-            }
-        } catch (err) {
-            showMessage('Errore di rete!', 'red');
+        const { ok, data } = await safeFetchJson(`${API_BASE_URL}/api/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+        if (ok && data.mfa) {
+            document.getElementById('mfaSection').style.display = 'block';
+            showMessage('Login corretto! Controlla la console del backend per il codice MFA.', 'blue');
+            sessionStorage.setItem('mfa_user', username);
+        } else {
+            showMessage(data.message, 'red');
         }
     });
 
@@ -70,33 +102,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const inputCode = document.getElementById('mfaCodeInput').value;
         const username = sessionStorage.getItem('mfa_user');
         const mfaMsg = document.getElementById('mfaMessage');
-        try {
-            const res = await fetch('http://localhost:3000/api/verify-mfa', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, code: inputCode })
-            });
-            const data = await res.json();
-            if (res.ok) {
-                mfaMsg.textContent = data.message;
-                mfaMsg.style.color = 'green';
-                // Mostra area riservata
-                setTimeout(() => {
-                    document.querySelector('.container').innerHTML = `
-                        <h2>Area Riservata</h2>
-                        <p>Benvenuto, <b>${username}</b>! Hai effettuato l'accesso con successo tramite MFA.</p>
-                        <button id="logoutBtn">Logout</button>
-                    `;
-                    document.getElementById('logoutBtn').onclick = function() {
-                        window.location.reload();
-                    };
-                }, 1000);
-            } else {
-                mfaMsg.textContent = data.message;
-                mfaMsg.style.color = 'red';
-            }
-        } catch (err) {
-            mfaMsg.textContent = 'Errore di rete!';
+        const { ok, data } = await safeFetchJson(`${API_BASE_URL}/api/verify-mfa`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, code: inputCode })
+        });
+        if (ok) {
+            mfaMsg.textContent = data.message;
+            mfaMsg.style.color = 'green';
+            // Mostra area riservata
+            setTimeout(() => {
+                document.querySelector('.container').innerHTML = `
+                    <h2>Area Riservata</h2>
+                    <p>Benvenuto, <b>${username}</b>! Hai effettuato l'accesso con successo tramite MFA.</p>
+                    <button id="logoutBtn">Logout</button>
+                `;
+                document.getElementById('logoutBtn').onclick = function() {
+                    window.location.reload();
+                };
+            }, 1000);
+        } else {
+            mfaMsg.textContent = data.message;
             mfaMsg.style.color = 'red';
         }
     });
