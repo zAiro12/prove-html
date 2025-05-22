@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Login Demo</title>
+    <link rel="stylesheet" href="social.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- <style>
+        .icon-social {
+            font-size: 22px;
+            vertical-align: middle;
+            margin-right: 8px;
+            margin-top: -2px;
+            display: inline-block;
+            width: 22px;
+            text-align: center;
+        }
+    </style> -->
+
+</head>
+<body>
+    <div class="container">
+        <h2>Accedi al Social</h2>
+        <div id="loginSection">
+            <form id="loginForm">
+                <label for="loginUsername">Username:</label><br>
+                <input type="text" id="loginUsername" required><br>
+                <label for="loginPassword">Password:</label><br>
+                <input type="password" id="loginPassword" required><br>
+                <button type="submit">Login</button>
+            </form>
+            <div id="loginMessage"></div>
+            <p>Non hai un account? <a href="#" id="showRegister">Registrati</a></p>
+        </div>
+        <div id="registerSection" style="display:none;">
+            <form id="registerForm">
+                <label for="registerUsername">Username:</label><br>
+                <input type="text" id="registerUsername" required><br>
+                <label for="registerEmail">Email:</label><br>
+                <input type="email" id="registerEmail" required><br>
+                <label for="registerPassword">Password:</label><br>
+                <input type="password" id="registerPassword" required><br>
+                <button type="submit">Registrati</button>
+            </form>
+            <div id="registerMessage"></div>
+            <p>Hai già un account? <a href="#" id="showLogin">Accedi</a></p>
+        </div>
+        <div id="welcomeSection" style="display:none;">
+            <h3>Benvenuto, <span id="welcomeUser"></span>!</h3>
+            <button id="logoutBtn">Logout</button>
+        </div>
+        <div class="social-login">
+            <button type="button" id="googleLogin" class="google-btn">
+                <i class="fab fa-google icon-social" aria-hidden="true"></i> Accedi con Google
+            </button>
+            <button type="button" id="facebookLogin" class="facebook-btn">
+                <i class="fab fa-facebook-f icon-social" aria-hidden="true"></i> Accedi con Facebook
+            </button>
+            <button type="button" id="githubLogin" class="github-btn">
+                <i class="fab fa-github icon-social" aria-hidden="true"></i> Accedi con GitHub
+            </button>
+        </div>
+    </div>
+    <script src="social.js"></script>
+</body>
+</html>
