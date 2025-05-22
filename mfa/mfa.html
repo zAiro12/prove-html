@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>MFA</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='mfa.css'>
+    <script src='mfa.js'></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="loginUsername" placeholder="Username" required><br>
+            <input type="password" id="loginPassword" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <hr>
+        <h2>Registrazione</h2>
+        <form id="registerForm">
+            <input type="text" id="registerUsername" placeholder="Username" required><br>
+            <input type="password" id="registerPassword" placeholder="Password" required><br>
+            <input type="email" id="registerEmail" placeholder="Email" required><br>
+            <button type="submit">Registrati</button>
+        </form>
+        <div id="registerResult"></div>
+        <div id="qrContainer" style="margin-top:10px;"></div>
+        <div id="message"></div>
+        <div id="mfaSection" style="display:none;">
+            <h3>Verifica MFA</h3>
+            <p>Inserisci il codice MFA ricevuto:</p>
+            <input type="text" id="mfaCodeInput" placeholder="Codice MFA"><br>
+            <button id="verifyMfaBtn">Verifica</button>
+            <div id="mfaMessage"></div>
+        </div>
+    </div>
+</body>
+</html>
