@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <style>
+      :root {
+        --blue: #007bff;
+      }
+
+      html, body {
+        margin: 0;
+      }
+      .paginaPodcast{
+          border-radius: 27px;
+      }
+
+      .paginaPodcast-header {
+          padding: 0;
+      }
+
+      .paginaPodcast-header {
+          display: flex;
+          height: max-content;
+          align-items: stretch;
+      }
+
+      .paginaPodcast-img{
+          width: 350px;
+          height: 350px;
+          aspect-ratio: 1/1;
+          z-index:1000;
+          margin-top: 50px;
+      }
+
+      .paginaPodcast-img > img{
+          width: 100%;
+          height: 100%;
+      }
+
+      .paginaPodcast-titolo {
+          margin-top: 80px;
+          text-transform: uppercase;
+          color: white;
+          background-color: var(--blue);
+          padding: 25px;
+          font-size: 3rem;
+          height: max-content;
+          flex:1;
+      }
+
+      .paginaPodcast-descrizione{
+          padding: 25px;
+      }
+
+      .paginaPodcast-contenuto{
+          padding: 30px;
+      }
+
+      .paginaPodcast p {
+          color: var(--blue)
+      }
+    </style>
+
+    <div class="paginaPodcast row my-25">
+      <div class="paginaPodcast-header">
+        <h1 id="fake" class="paginaPodcast-titolo">&#8203;</h1>
+
+        <div class="paginaPodcast-img"><img src="@img?.MediaUrl()" /></div>
+
+        <div style="width: 100%;">
+            <h1 id="capo" class="paginaPodcast-titolo">@Model .Value ("Titolo")</h1>
+            <p class="paginaPodcast-descrizione">@Model.Value("Descrizione")</p>
+        </div>
+      </div>
+
+      <div class="paginaPodcast-contenuto">
+        @await Html.GetBlockGridHtmlAsync(Model, "elementi")
+      </div>
+    </div>
+
+    <script>
+      function syncHeights() {
+        const capoElement = document.getElementById('capo');
+        const fakeElement = document.getElementById('fake');
+        
+        const capoStyle = window.getComputedStyle(capo);
+        const capoHeight = capo.scrollHeight 
+          - parseFloat(capoStyle.paddingTop) 
+          - parseFloat(capoStyle.paddingBottom);
+        fakeElement.style.height = `${capoHeight}px`;
+      }
+
+      // Esegui al caricamento e al resize
+      window.addEventListener("load", syncHeights);
+      window.addEventListener("resize", syncHeights);
+
+      
+    </script>
+  </body>
+</html>

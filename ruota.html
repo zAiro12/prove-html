@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>ruota</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+        <script src="main.js"></script>
+    </head>
+
+    <style>
+        /* overlay full-screen con sfondo scuro semi-trasparente */
+        #rotate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5); /* oscuramento leggero */
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            text-align: center;
+            pointer-events: none; /* così il tocco non “passa” all’overlay */
+        }
+
+        /* SVG o immagine ruota più visibile */
+        #rotate-overlay svg,
+        #rotate-overlay img {
+            margin-bottom: 1rem;
+            width: 80px;
+            height: 80px;
+            pointer-events: auto; /* se vuoi che l’icona sia cliccabile */
+        }
+
+        /* In portrait: mostro overlay e ruoto il contenuto */
+        @media only screen and (orientation: portrait) {
+            #rotate-overlay {
+                display: flex;
+            }
+
+            #main-content {
+                display: block;
+                position: absolute;
+                /* ruoto di 90° antiorario */
+                transform: rotate(-90deg);
+                /* imposto l’origine in alto a sinistra per far combaciare */
+                transform-origin: top left;
+                /* scambio larghezza/altezza per “riempire” */
+                width: 100vh;
+                height: 100vw;
+                top: 100%; /* sposto il contenuto ruotato giù di un “100%” */
+                left: 0;
+                overflow: hidden;
+            }
+        }
+
+        /* In landscape: torna tutto normale */
+        @media only screen and (orientation: landscape) {
+            #rotate-overlay {
+                display: none;
+            }
+            #main-content {
+                position: static;
+                width: auto;
+                height: auto;
+                transform: none;
+                overflow: visible;
+            }
+        }
+    </style>
+    <body>
+        <div id="rotate-overlay">
+            <!-- qui puoi mettere un’icona SVG o un’immagine -->
+            <svg width="100" height="100" viewBox="0 0 24 24">
+                <!-- un semplice cerchio con freccia -->
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#444"
+                    stroke-width="2"
+                    fill="none"
+                />
+                <path
+                    d="M12 4 a8 8 0 1 0 8 8"
+                    stroke="#444"
+                    stroke-width="2"
+                    fill="none"
+                />
+                <polyline
+                    points="20,4 20,10 14,10"
+                    stroke="#444"
+                    stroke-width="2"
+                    fill="none"
+                />
+            </svg>
+            <p>Ruota il dispositivo in orizzontale</p>
+        </div>
+
+        <div id="main-content">
+            <!-- qui va il tuo sito vero e proprio -->
+            <h1>Benvenuto sul mio sito!</h1>
+            <p>…altro contenuto…</p>
+        </div>
+
+        <script src="orientation.js"></script>
+    </body>
+</html>

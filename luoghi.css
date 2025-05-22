@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-style: normal;
+}
+*:focus{
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
+}
+h1 {
+  font-size: 2.5rem;
+  line-height: 48px;
+}
+h2 {
+  font-size: 2rem;
+  line-height: 40px;
+}
+h3 {
+  font-size: 1.75rem;
+  line-height: 32px;
+}
+h4 {
+  font-size: 1.5rem;
+  line-height: 32px;
+}
+h5 {
+  font-size: 1.18rem;
+  line-height: 24px;
+}
+.bodyXL {
+  font-size: 1.18rem;
+  line-height: 24px;
+}
+.body {
+  font-size: 1rem;
+  line-height: 24px;
+}
+.bodyXS {
+  font-size: 0.85rem;
+  line-height: 18px;
+}
+.bodyXXS {
+  font-size: 0.85rem;
+  line-height: 16px;
+}
+
+
+/* #region mycard */
+  .mycard {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .mycard > img{
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    border-radius: 0;
+  }
+
+  .mycard:hover > img, .mycard:focus > img{
+    transform: scale(0.97);
+    border: 4px solid #fff;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.32);
+  }
+
+  .mycard:hover > h3{
+    text-decoration: underline;
+  }
+
+  .mycard:focus > .focus{
+    border: 6px solid rgba(160, 120, 0, 1);
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+
+  .mycard:focus > .focus > h3{
+    text-decoration: underline;
+  }
+/* #endregion mycard */
+
+
+/* #region dropdown */
+  .mydropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .mydropdown-button {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    width: 130px;
+    text-align: center;
+  }
+
+  .mydropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1;
+    width: 130px;
+    margin-top: 1px;
+  }
+
+  .mydropdown-content label {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 15px;
+    line-height: 1;
+    user-select: none; 
+  }
+
+  .mydropdown-content label:last-child {
+    margin-bottom: 0;
+  }
+
+  .mydropdown-content input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .mydropdown:hover .mydropdown-content,
+  .mydropdown:focus-within .mydropdown-content {
+    display: block;
+  }
+/* #ednregion dropdown */
+
+
+/* #region ricerca-card */
+  .ricerca-card {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 22px;
+  }
+
+  .ricerca-card-sx > div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .ricerca-card-dx > img{
+    max-width: 248px;
+    height: 100%;
+    aspect-ratio: 4/3;
+  }
+
+/* #endregion ricerca-card */

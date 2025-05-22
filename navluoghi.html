@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .nav {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            /* Aggiungi qui altri stili per lo stato attivo */
+        }
+
+        /* Opzionale: effetto hover */
+        .nav-item:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-item active">Home</div>
+        <div class="nav-item">About</div>
+        <div class="nav-item">Services</div>
+        <div class="nav-item">Contact</div>
+    </nav>
+
+    <script>
+        // Seleziona tutti gli elementi della navbar
+        const navItems = document.querySelectorAll('.nav-item');
+
+        // Aggiungi gestore eventi a ciascun elemento
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Rimuovi la classe 'active' da tutti gli elementi
+                navItems.forEach(navItem => navItem.classList.remove('active'));
+                // Aggiungi la classe 'active' all'elemento cliccato
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

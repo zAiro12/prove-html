@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Luoghi dell'infinito</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="luoghi.css" />
+    <!-- <script src="main.js"></script> -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="row">
+        <div class="col-md-4 mycard" tabindex="0">
+          <img src="https://placehold.co/588x441" alt="" />
+          <h3 class="focus">Ancona, la cattedrale come faro</h3>
+          <p>
+            I cercapersone sono scoppiati simultaneamente causando 9 morti nel
+            Paese, tra cui una bimba di 9 anni. Ma ci sono state anche sette
+            vittime in Siria. Netanyahu rinvia il "licenziamento" di Gallant
+          </p>
+          <span>di Luigi Coderno</span>
+        </div>
+        <div class="col-md-4 mycard" tabindex="0">
+          <img src="https://placehold.co/282x364" alt="" />
+          <div class="focus">
+            <h3>Gennaio - n.301</h3>
+            <p>
+              I cercapersone sono scoppiati simultaneamente causando 9 morti nel
+              Paese, tra cui una bimba di 9 anni. Ma ci sono state anche sette
+              vittime in Siria. Netanyahu rinvia il "licenziamento" di Gallant
+            </p>
+          </div>
+          <span>di Luigi Coderno</span>
+        </div>
+        <div class="col-md-4 mycard" tabindex="0">
+          <img src="https://placehold.co/588x441" alt="" />
+          <h3 class="focus">Ancona, la cattedrale come faro</h3>
+          <p>
+            I cercapersone sono scoppiati simultaneamente causando 9 morti nel
+            Paese, tra cui una bimba di 9 anni. Ma ci sono state anche sette
+            vittime in Siria. Netanyahu rinvia il "licenziamento" di Gallant
+          </p>
+          <span>di Luigi Coderno</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2">
+          <select tabindex="0">
+            <option disabled selected>Selezionare un anno</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+          </select>
+        </div>
+        <div class="col-1">
+          <div class="mydropdown" tabindex="0">
+            <button class="mydropdown-button" tabindex="0">
+              Filtra per anno
+            </button>
+            <div class="mydropdown-content">
+              <label> <input type="checkbox" value="2025" /> 2025 </label>
+              <label> <input type="checkbox" value="2024" /> 2024 </label>
+              <label> <input type="checkbox" value="2023" /> 2023 </label>
+              <label> <input type="checkbox" value="2022" /> 2022 </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="ricerca-card-cont">
+            <div class="ricerca-card">
+              <div class="ricerca-card-sx">
+                <div>
+                  <b>Novembre 2024</b>
+                  <p>numero 229</p>
+                </div>
+                <h5>Le catacombe ritrovate</h5>
+                <span>di Quinto Cappelli</span>
+                <p>
+                  Come tradizione oggi la Messa solenne in onore del patrono
+                  della diocesi emiliana. A presentarla quest'anno l'arcivescovo
+                  di Ferrara-Comacchio Perego
+                </p>
+                <button>Acqista una copia</button>
+              </div>
+              <div class="ricerca-card-dx">
+                <img src="https://placehold.co/248x186" alt="" />
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Includi Swiper -->
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/swiper/swiper-bundle.min.css"
+        />
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://placehold.co/300x350" alt="Luoghi Infinito" />
+              <div class="slide-title">LUOGHI INFINITO</div>
+            </div>
+            <div class="swiper-slide">
+              <img src="https://placehold.co/300x350" alt="Divina Bellezza" />
+              <div class="slide-title">DIVINA BELLEZZA</div>
+            </div>
+            <!-- Aggiungi altri slide qui -->
+          </div>
+          <!-- Aggiungi paginazione e frecce -->
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+
+        <style>
+          .swiper-container {
+            width: 100%;
+            height: 500px;
+          }
+          .slide-title {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          }
+        </style>
+
+        <script>
+          const swiper = new Swiper(".swiper-container", {
+            loop: true,
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+          });
+        </script>
+      </div>
+      <h2>ciao sono luca</h2>
+    </main>
+  </body>
+</html>
