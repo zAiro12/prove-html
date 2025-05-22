@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+.env
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+
+# Output temporanei
+*.tmp
+*.swp
+
+# Cartelle di build
+/dist/
+/build/
+
+# Backup
+*~
+
+# Altri file sensibili
+backend/.env
