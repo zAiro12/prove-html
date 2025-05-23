@@ -1,5 +1,5 @@
 // Base URL centralizzato per tutte le chiamate API
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://localhost:3456';
 // const API_BASE_URL = 'https://l6n7dj74-3000.euw.devtunnels.ms';
 
 // Gestione login e registrazione demo
