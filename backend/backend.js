@@ -14,7 +14,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 
 const app = express();
-const port = 3000;
+const port = 3456;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -45,7 +45,7 @@ const swaggerOptions = {
       description: 'API demo per login, registrazione e MFA'
     },
     servers: [
-      { url: 'http://localhost:3000' }
+      { url: `http://localhost:${port}` }
     ]
   },
   apis: [__filename],
