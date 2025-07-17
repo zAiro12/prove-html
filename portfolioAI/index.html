@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Creativo - HTML/CSS/JS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: .15em solid #a777e3;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #a777e3; }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navbar -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold">MyPortfolio</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-gray-200">Home</a>
+                    <a href="#services" class="hover:text-gray-200">Servizi</a>
+                    <a href="#projects" class="hover:text-gray-200">Progetti</a>
+                    <a href="projects.html" class="hover:text-gray-200">Tutti i Progetti</a>
+                    <a href="#about" class="hover:text-gray-200">Chi Sono</a>
+                    <a href="#contact" class="hover:text-gray-200">Contatti</a>
+                </div>
+                <button class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="typewriter mb-6">
+                <h1 class="text-4xl md:text-6xl font-bold">Cosa posso creare per te?</h1>
+            </div>
+            <p class="text-xl md:text-2xl mb-12">Siti web moderni, reattivi e unici con HTML, CSS e JavaScript</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-white text-purple-600 font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition duration-300">
+                    Scopri di più
+                </button>
+                <button class="border-2 border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-purple-600 transition duration-300">
+                    Contattami
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">I Miei Servizi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md card-hover">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-laptop-code text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Siti Web Personalizzati</h3>
+                    <p class="text-gray-600">Creazione di siti web su misura con design unico e funzionalità avanzate utilizzando HTML, CSS e JavaScript.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md card-hover">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-mobile-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Design Responsivo</h3>
+                    <p class="text-gray-600">Siti che si adattano perfettamente a qualsiasi dispositivo, dal desktop allo smartphone.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md card-hover">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-chart-line text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Ottimizzazione SEO</h3>
+                    <p class="text-gray-600">Siti ottimizzati per i motori di ricerca per migliorare la visibilità online.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md card-hover">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-shopping-cart text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">E-commerce</h3>
+                    <p class="text-gray-600">Creazione di negozi online con carrello della spesa e integrazioni di pagamento.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md card-hover">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-paint-brush text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">UI/UX Design</h3>
+                    <p class="text-gray-600">Interfacce utente intuitive e piacevoli che migliorano l'esperienza dell'utente.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md card-hover">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-cogs text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Integrazioni API</h3>
+                    <p class="text-gray-600">Connessione del tuo sito a servizi esterni e database per funzionalità avanzate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vue.js Demo Section -->
+    <section class="py-20 bg-gray-100">
+        <div id="vue-app" class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Dimostrazione Vue.js</h2>
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md">
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
+                        Scrivi un messaggio:
+                    </label>
+                    <input v-model="message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" type="text" placeholder="Il tuo messaggio...">
+                </div>
+                <div class="mb-4">
+                    <p class="text-gray-600">Messaggio in tempo reale:</p>
+                    <p class="text-xl font-semibold text-purple-600">{{ message }}</p>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Contatore:
+                    </label>
+                    <p class="text-2xl font-bold text-gray-800">{{ counter }}</p>
+                    <button @click="incrementCounter" class="mt-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Incrementa (+1)
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Seleziona un'opzione:
+                    </label>
+                    <select v-model="selectedOption" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option v-for="option in options" :value="option.value">{{ option.text }}</option>
+                    </select>
+                    <p class="mt-2 text-gray-600">Hai selezionato: <span class="font-semibold">{{ selectedOption }}</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">Progetti Recenti</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="rounded-xl overflow-hidden shadow-lg card-hover">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="E-commerce">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2 text-gray-800">Negozio Online</div>
+                        <p class="text-gray-600 text-base">
+                            Sito e-commerce completo con carrello della spesa e integrazione di pagamento.
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#HTML</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#CSS</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#JavaScript</span>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="rounded-xl overflow-hidden shadow-lg card-hover">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Portfolio">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2 text-gray-800">Portfolio Creativo</div>
+                        <p class="text-gray-600 text-base">
+                            Sito portfolio con animazioni personalizzate e design unico.
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#HTML</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#CSS</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Animazioni</span>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="rounded-xl overflow-hidden shadow-lg card-hover">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Dashboard">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2 text-gray-800">Dashboard Admin</div>
+                        <p class="text-gray-600 text-base">
+                            Interfaccia admin con grafici interattivi e gestione dati in tempo reale.
+                        </p>
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#JavaScript</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#API</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#ChartJS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Chi Sono</h2>
+                    <p class="text-gray-600 mb-4">
+                        Sono uno sviluppatore front-end con una passione per la creazione di esperienze web eccezionali. Mi specializzo in HTML, CSS e JavaScript per costruire interfacce utente moderne, reattive e accessibili.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Con anni di esperienza nel settore, ho lavorato su una varietà di progetti, dai semplici siti vetrina a complesse applicazioni web. Credo nel potere del design pulito e del codice ben strutturato.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white px-4 py-2 rounded-full shadow">
+                            <span class="text-purple-600 mr-2"><i class="fab fa-html5"></i></span>
+                            <span class="text-gray-700">HTML5</span>
+                        </div>
+                        <div class="bg-white px-4 py-2 rounded-full shadow">
+                            <span class="text-purple-600 mr-2"><i class="fab fa-css3-alt"></i></span>
+                            <span class="text-gray-700">CSS3</span>
+                        </div>
+                        <div class="bg-white px-4 py-2 rounded-full shadow">
+                            <span class="text-purple-600 mr-2"><i class="fab fa-js"></i></span>
+                            <span class="text-gray-700">JavaScript</span>
+                        </div>
+                        <div class="bg-white px-4 py-2 rounded-full shadow">
+                            <span class="text-purple-600 mr-2"><i class="fab fa-vuejs"></i></span>
+                            <span class="text-gray-700">Vue.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <img class="rounded-xl shadow-xl w-full h-auto max-w-md mx-auto" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sviluppatore al lavoro">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">Contattami</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                                    Nome
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Il tuo nome" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                    Email
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="tua@email.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">
+                                Oggetto
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text" placeholder="Oggetto del messaggio" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
+                                Messaggio
+                            </label>
+                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" rows="5" placeholder="Il tuo messaggio..." required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="gradient-bg text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline hover:opacity-90 transition duration-300">
+                                Invia Messaggio
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold">MyPortfolio</a>
+                    <p class="mt-2">Creiamo insieme qualcosa di straordinario.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-gray-200">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-gray-200">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-gray-200">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-gray-200">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-gray-200">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2023 MyPortfolio. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-purple-700">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send the data to a server
+            console.log({ name, email, subject, message });
+            
+            // Show success message
+            alert('Grazie per il tuo messaggio! Ti risponderò al più presto.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        // Mobile Menu Toggle (would need more implementation)
+        const mobileMenuButton = document.querySelector('nav button');
+        mobileMenuButton.addEventListener('click', () => {
+            alert('Menu mobile sarebbe implementato qui con più JavaScript');
+        });
+        
+        // Vue.js App
+        const { createApp } = Vue;
+        
+        createApp({
+            data() {
+                return {
+                    message: 'Prova a scrivere qualcosa!',
+                    counter: 0,
+                    selectedOption: 'option1',
+                    options: [
+                        { text: 'Opzione 1', value: 'option1' },
+                        { text: 'Opzione 2', value: 'option2' },
+                        { text: 'Opzione 3', value: 'option3' }
+                    ]
+                }
+            },
+            methods: {
+                incrementCounter() {
+                    this.counter += 1;
+                }
+            }
+        }).mount('#vue-app');
+    </script>
+</body>
+</html>
